@@ -1,0 +1,112 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters - ADJUST THESE FOR YOUR INSTA360!
+#--------------------------------------------------------------------------------------------
+File.version: "1.0"
+
+# Camera model type
+# Use "PinHole" for standard cameras
+# Use "KannalaBrandt8" for fisheye/equidistant lenses (Kalibr equidistant = KannalaBrandt8)
+Camera.type: "KannalaBrandt8"
+
+# Camera calibration and distortion parameters
+# These values MUST be obtained from calibration of your specific Insta360
+
+Camera1.fx: 461.6398879418857
+Camera1.fy: 459.7153043295965
+Camera1.cx: 732.9460954720965
+Camera1.cy: 720.5410566713475
+
+# Distortion coefficients (for KannalaBrandt8 fisheye model)
+Camera1.k1: 0.03442918444998219
+Camera1.k2: -0.02155491263917851
+Camera1.k3: 0.0031292637056308044
+Camera1.k4: -0.0005356957576266091
+
+# Or for PinHole model, use these:
+# Camera1.k1: 0.0          # Radial distortion 1
+# Camera1.k2: 0.0          # Radial distortion 2
+# Camera1.p1: 0.0          # Tangential distortion 1
+# Camera1.p2: 0.0          # Tangential distortion 2
+
+# Camera resolution
+Camera.width: 1472
+Camera.height: 1440
+
+# Downsampled resolution - half res for faster processing
+Camera.newWidth: 736
+Camera.newHeight: 720
+
+# Camera frames per second
+Camera.fps: 30             # Insta360 typically captures at 30 or 60 fps - ADJUST!
+
+# Color order of the images (0: BGR, 1: RGB)
+Camera.RGB: 1
+
+#--------------------------------------------------------------------------------------------
+# IMU Parameters - Required for Monocular-Inertial or Stereo-Inertial variants
+#--------------------------------------------------------------------------------------------
+
+# IMU sampling frequency (Hz)
+IMU.Frequency: 995.0
+
+# Transformation from camera to body-frame (IMU)
+# T_b_c1 = T_{body<-cam} = inverse of Kalibr's T_cam_imu
+IMU.T_b_c1: !!opencv-matrix
+  rows: 4
+  cols: 4
+  dt: f
+  data: [0.017538565106728687, 0.9998137173927377, -0.008057868657999826, -0.014550417352510902,
+         0.0002862690432675019, -0.008064129276509995, -0.9999674434045561, -0.011706498752080945,
+         -0.9998461465565737, 0.01753568739240835, -0.00042764897266889707, 0.020268516188960396,
+         0.0, 0.0, 0.0, 1.0]
+
+# IMU noise parameters - These affect tracking quality
+IMU.NoiseGyro: 0.00047032046
+IMU.NoiseAcc: 0.00285891188
+IMU.GyroWalk: 0.00036433633
+IMU.AccWalk: 0.00130039805
+IMU.InsertKFsWhenLost: 1
+
+#--------------------------------------------------------------------------------------------
+# ORB Feature Extractor Parameters
+#--------------------------------------------------------------------------------------------
+
+# Number of features to extract per image
+ORBextractor.nFeatures: 1500
+
+# Scale factor between pyramid levels
+ORBextractor.scaleFactor: 1.2
+
+# Number of pyramid levels
+ORBextractor.nLevels: 8
+
+# Initial FAST threshold
+ORBextractor.iniThFAST: 20
+
+# Minimum FAST threshold
+ORBextractor.minThFAST: 5
+
+#--------------------------------------------------------------------------------------------
+# Tracking Parameters
+#--------------------------------------------------------------------------------------------
+
+# Minimum number of features for initialization
+# Tracking.minFeatures: 100
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+
+Viewer.KeyFrameSize: 0.05
+Viewer.KeyFrameLineWidth: 1.0
+Viewer.GraphLineWidth: 0.9
+Viewer.PointSize: 2.0
+Viewer.CameraSize: 0.08
+Viewer.CameraLineWidth: 3.0
+Viewer.ViewpointX: 0.0
+Viewer.ViewpointY: -0.7
+Viewer.ViewpointZ: -1.8
+Viewer.ViewpointF: 500.0
+Viewer.WaitTime: 5.0
